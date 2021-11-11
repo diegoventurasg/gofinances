@@ -16,7 +16,7 @@
 
 ## 📖 Sobre
 
-O Gofinances é um projeto que foi desenvolvido durante o Ignite da Rockeseat. Ele é um aplicativo de finanças pessoais com o objetivo de ajudar as pessoas a organizarem suas vidas financeiras. 
+O Gofinances é um projeto que foi desenvolvido durante o Ignite da Rocketseat. Ele é um aplicativo de finanças pessoais com o objetivo de ajudar as pessoas a organizarem suas vidas financeiras. 
 
 ## 🎨 Layout
 
