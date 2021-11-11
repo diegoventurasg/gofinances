@@ -16,7 +16,7 @@
 
 ## 📖 Sobre
 
-O Gofinance é um projeto que foi desenvolvido durante o Ignite da Rockeseat. Ele é um aplicativo de finanças pessoais com o objetivo de ajudar as pessoas a organinizarem suas vidas financeiras. 
+O Gofinances é um projeto que foi desenvolvido durante o Ignite da Rockeseat. Ele é um aplicativo de finanças pessoais com o objetivo de ajudar as pessoas a organizarem suas vidas financeiras. 
 
 ## 🎨 Layout
 
@@ -36,7 +36,7 @@ O Gofinance é um projeto que foi desenvolvido durante o Ignite da Rockeseat. El
 
 ## 🔧 Executando o projeto
 
-Utilize o **yarn install** ou o **npm install** para instalar as dependências do projeto.
+Utilize o **yarn** ou o **npm install** para instalar as dependências do projeto.
 Em seguida, inicie o projeto.
 
 ```cl
