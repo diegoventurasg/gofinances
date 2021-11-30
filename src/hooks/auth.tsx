@@ -114,17 +114,29 @@ function AuthProvider({ children }: AuthProviderProps) {
     }
 
     useEffect(() => {
-        async function loadUserStorageData() {
-            const userStoraged = await AsyncStorage.getItem(userStorageKey);
+        let isMounted = true;
 
-            if (userStoraged) {
-                const userLogged = JSON.parse(userStoraged) as User;
-                setUser(userLogged);
+        async function loadUserStorageData() {
+            try {
+                const userStoraged = await AsyncStorage.getItem(userStorageKey);
+
+                if (userStoraged) {
+                    const userLogged = JSON.parse(userStoraged) as User;
+                    if (isMounted) setUser(userLogged);
+                }
+            } catch (error) {
+                console.log(error);
+            } finally {
+                if (isMounted)
+                    setUserStorageLoading(false);
             }
-            setUserStorageLoading(false)
+
         }
 
         loadUserStorageData();
+        return () => {
+            isMounted = false;
+        };
     }, []);
 
     return (
