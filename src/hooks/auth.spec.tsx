@@ -2,6 +2,7 @@ import { renderHook, act } from '@testing-library/react-hooks';
 import { mocked } from 'ts-jest/utils';
 import { startAsync } from 'expo-auth-session';
 import fetchMock from 'jest-fetch-mock';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { AuthProvider, useAuth } from './auth';
 
@@ -10,6 +11,11 @@ jest.mock('expo-auth-session');
 fetchMock.enableMocks();
 
 describe('Auth Hook', () => {
+    beforeEach(async () => {
+        const userCollectionKey = '@gofinances:user'
+        await AsyncStorage.removeItem(userCollectionKey)
+    });
+
     it('should be able to sign in with an existing Google account', async () => {
 
         const googleMocked = mocked(startAsync as any);
@@ -29,7 +35,7 @@ describe('Auth Hook', () => {
 
         fetchMock.mockResponseOnce(JSON.stringify(userTest));
 
-        const { result, unmount } = renderHook(() => useAuth(), {
+        const { result } = renderHook(() => useAuth(), {
             wrapper: AuthProvider
         });
 
@@ -48,11 +54,21 @@ describe('Auth Hook', () => {
             wrapper: AuthProvider
         });
 
-        console.log('user should not connect if cancel authentication with Google');
-        console.log('before useEffect', result.current.user);
         await act(() => result.current.signInWithGoogle());
-        console.log('after useEffect', result.current.user);
 
         expect(result.current.user).not.toHaveProperty('id');
+    });
+
+    it('should be error with incorrectly Google parameters', async () => {
+        const { result } = renderHook(() => useAuth(), {
+            wrapper: AuthProvider
+        });
+
+        try {
+            await act(() => result.current.signInWithGoogle());
+        } catch (error) {
+            expect(result.current.user).toEqual({});
+        }
+
     });
 });
